@@ -74,7 +74,7 @@ const Pokemon = () => {
           className="input"
           maxLength={10}
           type="text"
-          placeholder="Enter Pokémon name"
+          placeholder="Enter Pokémon name or #"
           value={nameInput}
           onChange={(e) => setNameInput(e.target.value)} 
         />
@@ -87,7 +87,7 @@ const Pokemon = () => {
         <div className="modal">
           <div className="modal-content">
             <span className="close" onClick={handleCloseModal}>&times;</span>
-            <p>Unknown Pokémon. Please check the name and try again.</p>
+            <p>Unknown Pokémon. Please check the name and #, try again.</p>
           </div>
         </div>
       )}
