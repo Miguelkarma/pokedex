@@ -9,7 +9,9 @@ const Pokemon = () => {
   const [moves, setMoves] = useState(0);
   const [types, setTypes] = useState([]);
   const [stats, setStats] = useState([]);
+  const [sprites, setSprites] = useState({})
   const [showModal, setShowModal] = useState(false); 
+
 
   useEffect(() => {
     async function getData() {
@@ -17,6 +19,7 @@ const Pokemon = () => {
         try {
           const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${searchName.toLowerCase()}`);
           setName(res.data.name);
+          setSprites(res.data.sprites);
           setMoves(res.data.moves.length);
           setTypes(res.data.types.map(typeInfo => typeInfo.type.name));  
           setStats(res.data.stats.map(statInfo => ({
@@ -49,16 +52,18 @@ const Pokemon = () => {
     <>
     
       <div className="content img">
+        
         <section className='sabo'>
+          
           <h1>
             <span>Pokédex : {searchName}</span>
           </h1>
-        
+        <img src={sprites.front_default} alt={name} className="pokemon-img" />
           <h2>
             Pokémon : <span>{name}</span> 
           </h2>
           <h2>
-            Moves: <span>{moves}</span> 
+            Moves : <span>{moves}</span> 
           </h2>
 
           <h2>
@@ -72,7 +77,7 @@ const Pokemon = () => {
         </section>
         <input
           className="input"
-          maxLength={10}
+          maxLength={20}
           type="text"
           placeholder="Enter Pokémon name or #"
           value={nameInput}
@@ -82,6 +87,7 @@ const Pokemon = () => {
           Submit
         </button>
       </div>
+      
 
       {showModal && ( 
         <div className="modal">
@@ -92,9 +98,7 @@ const Pokemon = () => {
         </div>
       )}
 
-      <footer className="footer">
-        Copyright©Miguelkarma
-      </footer>
+   
     </>
   );
 };
